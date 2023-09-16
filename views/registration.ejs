@@ -52,6 +52,13 @@
                     <input type="submit" class="btn btn-outline-danger rounded-pill" value="Register">
                 </div>
 
+                <!-- Registration result -->
+                <div>
+                    <% if(typeof message != 'undefined') { %>
+                        <p class="<%= text %>">&#<%= Symbol %>;<%= message %></p>
+                    <% } %>
+                </div>
+
             </form>
         </div>
     </div>

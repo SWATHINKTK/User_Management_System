@@ -10,6 +10,8 @@ user_route.use(express.urlencoded({extended:true}));
 user_route.set('view engine','ejs');
 
 
+
+
 // multer is used to upload file 
 const storage = multer.diskStorage({
     destination:(req,file,cb) => {
