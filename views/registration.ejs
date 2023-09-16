@@ -1,0 +1,58 @@
+<%- include('../views/header.ejs') %>
+    <div class="container d-flex ">
+
+        <div class="container col-xl-4 col-md-3 col-sm-6 bg-light">
+        
+            <!-- Heading section -->
+            <div class="title text-center">
+                <h1>Registration</h1>
+            </div>
+
+            <!-- form section -->
+            <form method="POST" action="/register">
+
+                <!-- firstname -->
+                <div class="form-group mt-3">
+                    <span>First Name :</span>
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="first name" name="firstname" value="">
+                </div>
+
+                <!-- lastname -->
+                <div class="form-group mt-3">
+                    <span>Last Name :</span>
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="last name" name="lastname" value="">
+                </div>
+
+                <!--email -->
+                <div class="form-group mt-3">
+                    <span>Email :</span>
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="email@gmail.com" name="email" value="">
+                </div>
+                
+                <!-- PhoneNumber -->
+                <div class="form-group mt-3">
+                    <span>Phone Number :</span>
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="phone number" name="phone" value="">
+                </div>
+
+                <!-- profile picture -->
+                <div class="form-group mt-3">
+                    <span>Profile :</span>
+                    <input type="file" class="form-control bg-transparent border-bottom"  name="filename" value="">
+                </div>
+
+                <!-- Password -->
+                <div class="form-group mt-3">
+                    <span>Password :</span>
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="Password" name="password" value="">
+                </div>
+
+                <!-- Submit button -->
+                <div class="form-group mt-3 mb-3">
+                    <input type="submit" class="btn btn-outline-danger rounded-pill" value="Register">
+                </div>
+
+            </form>
+        </div>
+    </div>
+<%- include('../views/footer.ejs') %>
