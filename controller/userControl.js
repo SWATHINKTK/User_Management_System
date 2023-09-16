@@ -12,19 +12,21 @@ const loadRegister = async(req,res)=>{
 const userRegister = async(req,res) => {
     try{
         console.log(req.body)
-        res.send("hello")
-        const userRegisterdata = {
+        // res.send("hello")
+        const userRegisterdata = new userdetils({
             firstname : req.body.firstname,
             lastname : req.body.lastname,
             email : req.body.email,
             phone : req.body.phone,
-            image : req.file.filename,
+            profile : req.file.filename,
             password : req.body.password,
             is_admin : 0
-        }
-        const userdata = await userregisterdata.save();
+        })
+        console.log(userRegisterdata)
+        const userdata = await userRegisterdata.save();
         res.send(userdata);
         
+
     }catch(err){
         console.log("Error details entering",err.message);
     }

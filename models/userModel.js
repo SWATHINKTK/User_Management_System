@@ -17,13 +17,17 @@ const Userschema = mongoose.Schema({
         type : Number,
         required : true
     },
-    password : {
+    profile : {
         type : String,
         required : true
     },
+    password : {
+        type : String,
+        require : true
+    },
     is_admin : {
         type : Number,
-        required : true
+        require : true
     },
     is_verified : {
         type : Number,

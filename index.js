@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 // mongoose to connect database
-mongoose.connect('mongodb://127.0.0.1:27017')
+mongoose.connect('mongodb://127.0.0.1:27017/ums')
     .then(() => console.log("connection established"))
     .catch((err) => console.log('connecation rejected',err.message))
 
