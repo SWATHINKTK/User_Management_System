@@ -15,6 +15,10 @@ const hostname = '127.0.0.1';
 const user_route = require('./routers/userRouter');
 app.use('/',user_route);
 
+// login Router
+const login_Route = require('./routers/loginRouter');
+app.use('/',login_Route);
+
 
 
 app.listen(port, () => {
