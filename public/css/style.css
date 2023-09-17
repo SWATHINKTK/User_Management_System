@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap');
 body{
     background-color: aqua;
+    font-family: 'Kanit', sans-serif;
+}
+a{
+    text-decoration: none;
+}
+.main-body{
+    margin-top: 9rem;
+    box-shadow: 0.5px 0.5px 3px 3px #00000056;
+}
+
+.title h1{
+    font-size: 3rem;
+}
+
+.button{
+    font-size: 1.29rem;
 }

@@ -1,10 +1,10 @@
 <%- include('../views/header.ejs') %>
-    <div class="container d-flex">
+    <div class="main container d-flex">
 
-        <div class="container col-xl-4 col-md-6 col-sm-8 bg-light">
+        <div class="main-body container col-xl-4 col-md-7 col-sm-8 bg-light mt-5 rounded-1">
         
             <!-- Heading section -->
-            <div class="title text-center">
+            <div class="title text-center mt-3 mb-4">
                 <h1>Registration</h1>
             </div>
 
@@ -14,42 +14,42 @@
                 <!-- firstname --> 
                 <div class="form-group mt-3">
                     <span>First Name :</span>
-                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="first name" name="firstname" value="">
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="enter first name" name="firstname" value="">
                 </div>
 
                 <!-- lastname -->
                 <div class="form-group mt-3">
                     <span>Last Name :</span>
-                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="last name" name="lastname" value="">
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="enter last name" name="lastname" value="">
                 </div>
 
                 <!--email -->
                 <div class="form-group mt-3">
                     <span>Email :</span>
-                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="email@gmail.com" name="email" value="">
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="example@gmail.com" name="email" value="">
                 </div>
                 
                 <!-- PhoneNumber -->
                 <div class="form-group mt-3">
                     <span>Phone Number :</span>
-                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="phone number" name="phone" value="">
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="must have 10 numbers" name="phone" value="">
                 </div>
 
                 <!-- profile picture -->
                 <div class="form-group mt-3">
-                    <span>Profile :</span>
-                    <input type="file" class="form-control bg-transparent border-bottom"  name="profile" value="">
+                    <span>Upload a Profile :</span>
+                    <input type="file" class="form-control bg-transparent border-bottom"  name="profile" >
                 </div>
 
                 <!-- Password -->
                 <div class="form-group mt-3">
                     <span>Password :</span>
-                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="Password" name="password" value="">
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="must have 6+ character" name="password" value="">
                 </div>
 
                 <!-- Submit button -->
-                <div class="form-group mt-3 mb-3">
-                    <input type="submit" class="btn btn-outline-danger rounded-pill" value="Register">
+                <div class="text-center mt-4 mb-3">
+                    <input type="submit" class="button btn btn-outline-dark rounded-2 col-md-7 col-sm-12" value="Register">
                 </div>
 
                 <!-- Registration result -->
