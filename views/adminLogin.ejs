@@ -1,0 +1,43 @@
+<%- include('../views/header.ejs') %>
+    <div class="main container d-flex ">
+
+        <div class="main-body container col-xl-4 col-md-7 col-sm-8 bg-light">
+        
+            <!-- Heading section -->
+            <div class="title text-center text-secondary mt-3 mb-2">
+                <h1>Admin</h1>
+                <h2>Login</h2>
+            </div>
+
+            <!-- form section -->
+            <form method="POST" action="/admin/login">
+                <!-- Registration result -->
+                <div class="text-center">
+                    <% if(typeof message != 'undefined') { %>
+                        <p class="<%= text %>">&#<%= Symbol %>;<%= message %></p>
+                    <% } %>
+                </div>
+
+                <!-- username -->
+                <div class="form-group mt-3 ">
+                    <span>Userame :</span>
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="username" name="username" value="">
+                </div>
+
+                <!-- Password -->
+                <div class="form-group mt-3">
+                    <span>Password :</span>
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="password" name="password" value="">
+                </div>
+
+                <!-- Login button -->
+                <div class="form-group text-center mt-4 mb-4">
+                    <input type="submit" class="button btn btn-outline-danger rounded-5 col-md-7 col-sm-12" value="Login">
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+<%- include('../views/footer.ejs') %>

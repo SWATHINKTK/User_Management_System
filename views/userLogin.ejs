@@ -1,12 +1,18 @@
 <%- include('../views/header.ejs') %>
-    <div class="main container d-flex">
+    <div class="main container d-flex ">
 
-        <div class="main-body container col-xl-4 col-md-7 col-sm-8 bg-light">
+        <div class="main-body container col-xl-4 col-md-7 col-sm-8">
         
             <!-- Heading section -->
             <div class="title text-center mt-3 mb-3">
                 <h1>Login</h1>
                 <p>Existing User</p>
+                <!-- Registration result -->
+                <div>
+                    <% if(typeof message != 'undefined') { %>
+                        <p class="<%= text %>">&#<%= Symbol %>;<%= message %></p>
+                    <% } %>
+                </div>
             </div>
 
             <!-- form section -->
@@ -26,14 +32,7 @@
 
                 <!-- Login button -->
                 <div class="form-group text-center mt-4 mb-4">
-                    <input type="submit" class="button btn btn-outline-dark rounded-5 col-md-7 col-sm-12" value="Login">
-                </div>
-
-                <!-- Registration result -->
-                <div>
-                    <% if(typeof message != 'undefined') { %>
-                        <p class="<%= text %>">&#<%= Symbol %>;<%= message %></p>
-                    <% } %>
+                    <input type="submit" class="button btn btn-outline-dark rounded-pill col-md-7 col-sm-12" value="Login">
                 </div>
 
             </form>

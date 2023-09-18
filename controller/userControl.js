@@ -18,7 +18,7 @@ async function encryptPassword(password){
 // view Register Page 
 const loadRegister = async(req,res)=>{
     try{
-        res.render('registration');
+        res.render('userRegistration',{title:'register'});
     }
     catch(err){
         console.log("Error details entering",err.message);
@@ -39,22 +39,22 @@ const userRegister = async(req,res) => {
             password : securepassword,
             is_admin : 0
         })
-        
+
         // checking the email is exicted or not
         const matchedemail = await userdetils.findOne({email:req.body.email});
         if(matchedemail){
 
-            res.render('registration',{title:'register',text:"text-danger",message:"Registration Field",Symbol:10071});
+            res.render('UserRegistration',{title:'register',text:"text-danger",message:"Existing email",Symbol:10071});
 
         }else{
 
             const userdata = await userRegisterdata.save();
             console.log("User Registraction Sucessful....")
             if(userdata){
-                res.render('registration',{title:'register',text:"text-success",message:"Registration succesful", Symbol:9989});
+                res.render('userRegistration',{title:'register',text:"text-success",message:"Registration succesful", Symbol:9989});
             }
             else{
-                res.render('registration',{title:'register',text:"text-danger",message:"Registration Field",Symbol:10071});
+                res.render('userRegistration',{title:'register',text:"text-danger",message:"Registration Field",Symbol:10071});
             }
         }
     }catch(err){
@@ -66,7 +66,7 @@ const userRegister = async(req,res) => {
 // user login page loading
 const loadUser = async (req,res) => {
     try {
-        res.render('login');
+        res.render('userLogin',{title:'login'});
     } catch (error) {
         console.log(error.message);
     }
@@ -89,10 +89,10 @@ const verifyLogin = async(req,res) => {
                 res.redirect('/home');
                 res.end();
             }else{
-                res.render('login',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User'});     
+                res.render('UserLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User'});     
             }
         }else{
-            res.render('login',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User'});
+            res.render('userLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User'});
         }
     }catch(error){
         console.log(error.message);
@@ -104,7 +104,7 @@ const loadHome = async(req,res) =>{
     try{
         const userdata = await userdetils.findOne({_id:req.session.user_id});
         console.log(userdata);
-        res.render('home',{title:'home',image:userdata.profile,name:`${userdata.firstname} ${userdata.lastname}`,email:userdata.email,phone:userdata.phone});
+        res.render('userHome',{title:'home',image:userdata.profile,name:`${userdata.firstname} ${userdata.lastname}`,email:userdata.email,phone:userdata.phone});
     }catch(error){
         console.log(error.message);
     }

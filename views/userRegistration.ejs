@@ -4,8 +4,14 @@
         <div class="main-body container col-xl-4 col-md-7 col-sm-8 bg-light mt-5 rounded-1">
         
             <!-- Heading section -->
-            <div class="title text-center mt-3 mb-4">
+            <div class="title text-center mt-2 mb-4">
                 <h1>Registration</h1>
+                <!-- Registration result -->
+                <div>
+                    <% if(typeof message != 'undefined') { %>
+                        <p class="<%= text %>">&#<%= Symbol %>;<%= message %></p>
+                    <% } %>
+                </div>
             </div>
 
             <!-- form section -->
@@ -51,14 +57,6 @@
                 <div class="text-center mt-4 mb-3">
                     <input type="submit" class="button btn btn-outline-dark rounded-2 col-md-7 col-sm-12" value="Register">
                 </div>
-
-                <!-- Registration result -->
-                <div>
-                    <% if(typeof message != 'undefined') { %>
-                        <p class="<%= text %>">&#<%= Symbol %>;<%= message %></p>
-                    <% } %>
-                </div>
-
             </form>
         </div>
     </div>
