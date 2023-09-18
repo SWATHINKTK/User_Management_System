@@ -9,6 +9,7 @@ const hostname = '127.0.0.1';
 
 // static files adding 
 app.use('/css',express.static(path.join(__dirname,'./public/css/style.css')));
+app.use('/images',express.static(path.join(__dirname,'./public/Images')));
 
 
 // mongoose to connect database
@@ -27,5 +28,6 @@ const admin_route = require('./routers/adminRouter');
 app.use('/admin',admin_route);
 
 app.listen(port, () => {
-    console.log(`Server is running at http://${hostname}:${port}/`)
+    console.log(`Server is running at http://${hostname}:${port}/`);
 })
+
