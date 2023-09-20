@@ -10,7 +10,7 @@
                 <!-- Registration result -->
                 <div>
                     <% if(typeof message != 'undefined') { %>
-                        <p class="<%= text %>">&#<%= Symbol %>;<%= message %></p>
+                        <p class="<%= text %>" id="result_message">&#<%= Symbol %>;<%= message %></p>
                     <% } %>
                 </div>
             </div>
@@ -34,7 +34,6 @@
                 <div class="form-group text-center mt-4 mb-4">
                     <input type="submit" class="button btn btn-outline-dark rounded-pill col-md-7 col-sm-12" value="Login">
                 </div>
-
             </form>
 
             <!-- Register user navigation link -->
@@ -44,4 +43,12 @@
 
         </div>
     </div>
+
+
+    <script>
+        const result = document.getElementById('result_message');
+        setTimeout(() => {
+            result.innerHTML = '';
+        },2000);
+    </script>
 <%- include('../views/footer.ejs') %>

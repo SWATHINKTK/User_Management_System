@@ -1,42 +1,49 @@
 <%- include('../views/header.ejs') %>
-    <div class="home_main">
-      <nav class="navbar  bg-transparent">
-        <div class="container-fluid">
-          <a class="navbar-brand">Home</a>
-        </div>
-      </nav>
 
-      <!-- home profie detail view section -->
-      <section class="col-12 col-sm-4">
-        <table class="table">
-              <thead>
-                <tr>
-                    <th scope="col" colspan="2" rowspan="2" ><img src="<%= image %>" class="col-7"></th>
-                </tr>
-              </thead>
-          <tbody>
-            <tr>
-              <th>Name </th>
-              <td>: <%= name %></td>
-            </tr>
-            <tr>
-              <th scope="row">Email </th>
-              <td>: <%= email %></td>
-            </tr>
-            <tr>
-              <th scope="row">Phone Number </th>
-              <td>: <%= phone %></td>
-            </tr>
-            <tr>
-              <th scope="col" colspan="2" rowspan="2">
-                <form class="d-flex" action="/logout" method="POST">
-                  <button class="btn btn-outline-danger rounded-5 mt-2" type="submit">LogOut</button>
-                </form>
-              </th>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+    <!-- Main Division -->
+    <div class="home-main">
+
+        <!-- Navbar Section  -->
+        <nav class="navbar  bg-transparent home-nav">
+          <div class="container-fluid">
+            <a class="navbar-brand">Home</a>
+            <form class="d-flex" action="/logout" method="POST">
+              <button class="btn btn-outline-danger rounded-5 mt-2" type="submit">LogOut</button>
+            </form>
+          </div>  
+        </nav>
+      
+        <!-- User Home Section Div  -->
+        <div class="user-home d-flex justify-content-center align-items-center flex-column">
+            
+          <h1 class="user-home-head mt-5"> WELCOME <%= name %></h1>
+
+            <!-- home profie detail view section -->
+            <div class="col-12 col-sm-4">
+                <table class="table mt-5">
+                    <thead>
+                        <tr>
+                            <th scope="col" colspan="2" rowspan="2" class="text-center"><img src="<%= image %>" class="col-7 rounded-3"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th>Name </th>
+                            <td>:&nbsp;<%= name %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Email </th>
+                            <td>:&nbsp;<%= email %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Phone Number </th>
+                            <td>:&nbsp;<%= phone %></td>
+                        </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>    
     </div>
 
 <%- include('../views/footer.ejs') %>

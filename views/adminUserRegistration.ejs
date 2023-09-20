@@ -1,0 +1,100 @@
+<%- include('../views/header.ejs') %>
+
+        <!-- USER REGITRATION ON ADMIN  -->
+        <div style="height:auto; padding-top: 50px;" id="userupdate">
+
+            <div class="main container d-flex">
+            
+                <div class="main-body container col-xl-4 col-md-7 col-sm-8 bg-light mt-5 rounded-1">
+                    
+                    <a href="/admin/home" class="">
+                        <div class="text-center mt-4  text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                            </svg> 
+                            Back To Home
+                        </div>
+                    </a>
+
+
+                    <!-- Heading section -->
+                    <div class="title text-center mt-2 mb-4">
+                        <h1>Registration</h1>
+                        <!-- Registration result -->
+                        <div>
+                            <% if(typeof message != 'undefined') { %>
+                                <p class="<%= text %> sucess_message" id="sucess-result">&#<%= Symbol %>;<%= message %></p>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <!-- form section -->
+                    <form method="POST" action="/admin/register" enctype="multipart/form-data" >
+
+                        <!-- firstname --> 
+                        <div class="form-group mt-3">
+                            <span>First Name :</span>
+                            <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="enter first name" name="firstname" value="<%= locals.firstname ? firstname :'' %>">
+                        </div>
+
+                        <!-- lastname -->
+                        <div class="form-group mt-3">
+                            <span>Last Name :</span>
+                            <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="enter last name" name="lastname" value="<%= locals.lastname ? lastname :'' %>">
+                        </div>
+
+                        <!--email -->
+                        <div class="form-group mt-3">
+                            <span>Email :</span>
+                            <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="example@gmail.com" name="email" value="<%= locals.email ? email :'' %>">
+                        </div>
+                        
+                        <!-- PhoneNumber -->
+                        <div class="form-group mt-3">
+                            <span>Phone Number :</span>
+                            <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="must have 10 numbers" name="phone" value="<%= locals.phone ? phone :'' %>">
+                        </div>
+
+                        <!-- profile picture -->
+                        <div class="form-group mt-3">
+                            <span>Upload a Profile :</span>
+                            <input type="file" class="form-control bg-transparent border-bottom"  name="profile" value="<%= locals.profile ? profile :'' %>">
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group mt-3">
+                            <span>Password :</span>
+                            <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="must have 6+ character" name="password" value="">
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="text-center mt-4 mb-3">
+                            <input type="submit" class="button btn btn-outline-dark rounded-2 col-md-7 col-sm-12" value="Register">
+                        </div>
+                        <input type="hidden" class="form-control bg-transparent border-0 rounded-0 border-bottom" name="register_sucess" id="check_field" value="<%= locals.reg_res  ? reg_res : 'reject' %>">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script>
+            const result = document.getElementById('sucess-result');
+            const check = document.getElementById('check_field');
+            console.log(result.value);
+            if(check.value == 'Sucess' )
+            {
+                setTimeout(()=>{
+                    const newURL = '/admin/home#viewuser';
+                    window.location.href = newURL;
+                },2600);
+            }
+            setTimeout(()=>{
+                result.innerHTML = '';
+            },2600);
+            
+            
+        </script>
+
+<%- include('../views/footer.ejs') %>

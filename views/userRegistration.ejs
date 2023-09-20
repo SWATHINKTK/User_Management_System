@@ -9,7 +9,7 @@
                 <!-- Registration result -->
                 <div>
                     <% if(typeof message != 'undefined') { %>
-                        <p class="<%= text %>">&#<%= Symbol %>;<%= message %></p>
+                        <p class="<%= text %>" id="result_message">&#<%= Symbol %>;<%= message %></p>
                     <% } %>
                 </div>
             </div>
@@ -57,7 +57,26 @@
                 <div class="text-center mt-4 mb-3">
                     <input type="submit" class="button btn btn-outline-dark rounded-2 col-md-7 col-sm-12" value="Register">
                 </div>
+
+                <input type="hidden" id="check" name="res" value="<%= locals.check ? check : 'check' %>">
+
             </form>
         </div>
     </div>
+
+
+    <script>
+        const result = document.getElementById('result_message');
+        const check = document.getElementById('check');
+        if(check.value == 'sucess')
+        {
+            const url = '/login';
+            setTimeout(() => {
+                window.location.href = url
+            }, 2000);
+        }
+        setTimeout(() => {
+            result.innerHTML = '';
+        },2000);
+    </script>
 <%- include('../views/footer.ejs') %>
