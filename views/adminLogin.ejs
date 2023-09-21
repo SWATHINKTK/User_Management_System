@@ -15,14 +15,14 @@
                 <!-- Registration result -->
                 <div class="text-center">
                     <% if(typeof message != 'undefined') { %>
-                        <p class="<%= text %>">&#<%= Symbol %>;<%= message %></p>
+                        <p class="<%= text %>" id="result_message">&#<%= Symbol %>;<%= message %></p>
                     <% } %>
                 </div>
 
                 <!-- username -->
                 <div class="form-group mt-3 ">
                     <span>Userame :</span>
-                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="username" name="username" value="">
+                    <input type="text" class="form-control bg-transparent border-0 rounded-0 border-bottom" placeholder="username" name="username" value="" onkeyup="Validate(this)">
                 </div>
 
                 <!-- Password -->
@@ -41,4 +41,11 @@
 
         </div>
     </div>
+
+    <script>
+        const result = document.getElementById('result_message');
+        setTimeout(() => {
+            result.innerHTML = '';
+        },2000);
+    </script>
 <%- include('../views/footer.ejs') %>

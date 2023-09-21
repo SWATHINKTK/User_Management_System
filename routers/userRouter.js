@@ -42,7 +42,9 @@ user_route.get('/',auth.isLogout,userControl.loadUser);
 user_route.get('/login',auth.isLogout,userControl.loadUser);
 user_route.post('/login',userControl.verifyLogin);
 user_route.get('/home',auth.isLogin,userControl.loadHome);
-user_route.post('/logout',auth.isLogin,userControl.userLogout)
+user_route.post('/logout',auth.isLogin,userControl.userLogout);
+user_route.get('/verify', userControl.verify);
+
 
 
 

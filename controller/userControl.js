@@ -1,5 +1,6 @@
 const userdetils = require('../models/userModel');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
 
 
 // bcrypt is used to encrypting the password
@@ -14,6 +15,52 @@ async function encryptPassword(password){
 }
 
 
+// Send Verification 
+const sendVerification = async(name ,email, user_id) => {
+    try {
+        console.log('verification');
+        const transporter = nodemailer.createTransport({
+            host:'smtp.gmail.com',
+            port:587,
+            secure:false,
+            require:true,
+            auth:{
+                user:'swathinktk10@gmail.com',
+                pass:'qkxm daqx mbkn czzx'
+            }
+        });
+
+        const mailOptions = {
+            from:'swathinktk10@gmail.com',
+            to:email,
+            subject:'For Verification Mail',
+            html:'<p>Welcome '+name+', <br> Please Verify Your Account &nbsp; <a href="http://127.0.0.1:5000/verify?id='+user_id+'">Verify</a></p>'
+        }
+           
+        transporter.sendMail(mailOptions, (error, info) => {
+            if(error)
+                console.log(error.message);
+            else
+                console.log("Email has been Sented",info.response);
+        })
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+const verify = async(req,res) =>{
+    try {
+       await userdetils.updateOne({_id:req.query.id},{$set:{is_verified:1}});
+       res.send("<h1>Your Account is Verifed </h1><a href='http://127.0.0.1:5000/'>Go to Login</a>");
+       console.log('<H1>Your Account is Verified </h1>');
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+
+
 
 // view Register Page 
 const loadRegister = async(req,res)=>{
@@ -26,9 +73,17 @@ const loadRegister = async(req,res)=>{
 }
 
 
-// User Registration Post Request 9888
+// User Registration Post Request 
 const userRegister = async(req,res) => {
     try{
+        const dataBody = req.body;
+        for( key in dataBody)
+        {
+            if(dataBody[key] == null || dataBody[key] == '')
+            {
+                res.render('userRegistration',{title:'register',text:"text-danger",message:"Enter All Field",Symbol:10071});
+            }
+        }
         const securepassword = await encryptPassword(req.body.password)
         const userRegisterdata = new userdetils({
             firstname : req.body.firstname,
@@ -49,9 +104,12 @@ const userRegister = async(req,res) => {
         }else{
 
             const userdata = await userRegisterdata.save();
-            console.log("User Registraction Sucessful....")
             if(userdata){
-                res.render('userRegistration',{title:'register',text:"text-success",message:"Registration succesful", Symbol:9989});
+                const name = `${userRegisterdata.firstname} ${userRegisterdata.lastname}`
+                console.log(name)
+                sendVerification(name, userRegisterdata.email ,userRegisterdata._id);
+                console.log("User Registraction Sucessful....")
+                res.render('userRegistration',{title:'register',text:"text-success",message:"Registration succesful Please Check Your Mail And Verify", Symbol:9989, check:'sucess'});
             }
             else{
                 res.render('userRegistration',{title:'register',text:"text-danger",message:"Registration Field",Symbol:10071});
@@ -63,6 +121,7 @@ const userRegister = async(req,res) => {
 }
 
 
+
 // user login page loading
 const loadUser = async (req,res) => {
     try {
@@ -72,6 +131,7 @@ const loadUser = async (req,res) => {
     }
 }
 
+
 // user login verification
 const verifyLogin = async(req,res) => {
     try{
@@ -80,7 +140,7 @@ const verifyLogin = async(req,res) => {
 
         const userData = await userdetils.findOne({email:username});
         
-        if(userData){
+        if(userData && userData.is_admin == 0){
             const passwordMatch = await bcrypt.compare(password,userData.password);
             if(passwordMatch)
             {
@@ -89,22 +149,24 @@ const verifyLogin = async(req,res) => {
                 res.redirect('/home');
                 res.end();
             }else{
-                res.render('UserLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User'});     
+                res.render('UserLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User',result:'failed'});     
             }
         }else{
-            res.render('userLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User'});
+            res.render('userLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User',result:'failed'});
         }
     }catch(error){
         console.log(error.message);
     }
 }
 
+
+
 // Home page loading 
 const loadHome = async(req,res) =>{
     try{
         const userdata = await userdetils.findOne({_id:req.session.user_id});
-        console.log(userdata);
-        res.render('userHome',{title:'home',image:userdata.profile,name:`${userdata.firstname} ${userdata.lastname}`,email:userdata.email,phone:userdata.phone});
+        const name = `${userdata.firstname} ${userdata.lastname}`.toUpperCase();
+        res.render('userHome',{title:'home', image:userdata.profile, name:name, email:userdata.email, phone:userdata.phone});
     }catch(error){
         console.log(error.message);
     }
@@ -130,4 +192,5 @@ module.exports = {
     verifyLogin,
     loadHome,
     userLogout,
+    verify
 }

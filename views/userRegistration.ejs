@@ -70,13 +70,13 @@
         const check = document.getElementById('check');
         if(check.value == 'sucess')
         {
-            const url = '/login';
+            const url = '/';
             setTimeout(() => {
                 window.location.href = url
-            }, 2000);
+            }, 3000);
         }
         setTimeout(() => {
             result.innerHTML = '';
-        },2000);
+        },3000);
     </script>
 <%- include('../views/footer.ejs') %>
