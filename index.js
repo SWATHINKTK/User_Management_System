@@ -49,8 +49,8 @@ app.use('/admin', disableBackButton, admin_route);
 
 
 app.use('*',(req,res)=>{
-    res.send('hello')
-})
+    res.sendStatus(500);
+});
 
 // Server Running Port Setting
 app.listen(port, () => {

@@ -39,7 +39,7 @@ const upload = multer({storage:storage})
 user_route.get('/register',auth.isLogout,userControl.loadRegister);
 user_route.post('/register',upload.single('profile'),userControl.userRegister);
 user_route.get('/',auth.isLogout,userControl.loadUser);
-user_route.get('/login',auth.isLogout,userControl.loadUser);
+// user_route.get('/login',auth.isLogout,userControl.loadUser);
 user_route.post('/login',userControl.verifyLogin);
 user_route.get('/home',auth.isLogin,userControl.loadHome);
 user_route.post('/logout',auth.isLogin,userControl.userLogout);

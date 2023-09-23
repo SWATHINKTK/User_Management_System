@@ -124,7 +124,12 @@ const userRegister = async(req,res) => {
 // user login page loading
 const loadUser = async (req,res) => {
     try {
-        res.render('userLogin',{title:'login'});
+        if(!(req.query.result))
+        {
+            res.render('userLogin',{title:'login'});
+        }else{
+            res.render('UserLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User',result:'failed'});     
+        }
     } catch (error) {
         console.log(error.message);
     }
@@ -148,10 +153,12 @@ const verifyLogin = async(req,res) => {
                 res.redirect('/home');
                 res.end();
             }else{
-                res.render('UserLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User',result:'failed'});     
+                res.redirect('/?result=1');
+                // res.render('UserLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User',result:'failed'});     
             }
         }else{
-            res.render('userLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User',result:'failed'});
+            res.redirect('/?result=1');
+            // res.render('userLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User',result:'failed'});
         }
     }catch(error){
         console.log(error.message);
