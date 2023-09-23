@@ -13,9 +13,9 @@ const hostname = '127.0.0.1';
 //     next(); // Continue processing the request
 //   });
 const disableBackButton = (req, res, next) => {
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Cache-Control', 'no-cache, no-store,must-revalidate');
     res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
+    res.setHeader('Expires', '1');
     next();
 };
 
@@ -47,6 +47,10 @@ const admin_route = require('./routers/adminRouter');
 app.use('/admin', disableBackButton, admin_route);
 
 
+
+app.use('*',(req,res)=>{
+    res.send('hello')
+})
 
 // Server Running Port Setting
 app.listen(port, () => {

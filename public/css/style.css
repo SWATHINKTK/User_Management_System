@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron:wght@900&display=swap');
+html{
+    scroll-behavior: smooth
+}
+
 body{
     background-color: #ffffff;
     background-repeat: no-repeat;
@@ -32,6 +36,8 @@ a{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: 'Black Ops One', cursive;
+    font-family: 'Orbitron', sans-serif;
 }
 .profile_nav{
     position: fixed;
@@ -39,6 +45,12 @@ a{
 .admin_table td,th{
     vertical-align: middle;
 }
+.admin-nav{
+    box-shadow: 1px 2px 2px rgb(195, 195, 195);
+}
+
+
+
 
 /* Register sucessfull Message  */
 .sucess_message{
@@ -57,9 +69,18 @@ a{
     /* font-family: 'Black Ops One', cursive;
     font-family: 'Orbitron', sans-serif; */
 }
-
 .home-nav{
     /* font-family: 'Black Ops One', cursive; */
     font-family: 'Black Ops One', cursive;
     font-family: 'Orbitron', sans-serif;
+    /* background-attachment: scroll; */
+}
+
+
+/* Vallidation  */
+#validateUsername,#validatePassword{
+    font-size: 0.9em ;
+}
+.userReg p{
+    font-size: 0.89em ;
 }

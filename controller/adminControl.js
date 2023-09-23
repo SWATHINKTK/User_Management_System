@@ -1,5 +1,7 @@
 const userDetails = require('../models/userModel');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+const SendmailTransport = require('nodemailer/lib/sendmail-transport');
 
 
 // bcrypt is used to encrypting the password
@@ -105,18 +107,71 @@ const loadUserRegistration = async(req,res) => {
 
 
 
-// User Registration Post Request 
+// Admin Createuser Account & Send Username and Password to the user to email
+const sendLogindataEmail = async(email , password, user_id) => {
+    try {
+        const transporter = nodemailer.createTransport({
+            host:'smtp.gmail.com',
+            port:587,
+            secure:false,
+            require:true,
+            auth:{
+                user:'swathinktk10@gmail.com',
+                pass:'qkxm daqx mbkn czzx' 
+            }
+        })
+        const mailOptions = {
+            from:'swathinktk10@gmail.com',
+            to:email,
+            subject:'Your Login Username and Password',
+            html:'<p>USERNAME : '+email+' <br>PASSWORD : '+password+'</p>Check this Link Complete Verification Feature : <a href="http://127.0.0.1:5000/admin/verify?id='+user_id+'">verify & forgotpassword</a>'
+        }
+        transporter.sendMail(mailOptions,(error,info) => {
+            if(error){
+                console.log(error.message);
+            }else{
+                console.log("Email has been Sended ",info.response);
+            }
+        })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+
+// User Forgotpassword Option Page Load 
+const verify = async(req,res) => {
+    try {
+        await userDetails.updateOne({_id:req.query.id},{$set:{is_verified:1}});
+        console.log('Admin Created User Verified.');
+        res.render('forgotpassword',{title:'Forgotpassword',id:req.query.id})
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// forgotpassword to data updating
+const forgotpassword = async(req,res) => {
+    try {
+        const securepassword = await encryptPassword(req.body.password);
+        await userDetails.updateOne({_id:req.body.id},{$set:{password:securepassword}});
+        console.log('Admin Created User Password Changed.');
+        res.redirect('/');
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+
+// Admin User Registration Post Request 
 const userRegister = async(req,res) => {
     try{
         obj = req.body;
-        console.log(obj)
         for (var key in obj) {
             if (obj[key] == null || obj[key] == '')
                 res.render('adminUserRegistration',{title:'register',text:"text-danger",message:"Enter All Field ",Symbol:10071});
                 
         }
-        console.log(Object.keys(req.body).length)
-        console.log(obj);
         const securepassword = await encryptPassword(req.body.password);
         const userRegisterdata = new userDetails({
             firstname : req.body.firstname,
@@ -131,18 +186,21 @@ const userRegister = async(req,res) => {
         // checking the email is exicted or not
         const matchedemail = await userDetails.findOne({email:req.body.email});
         if(matchedemail){
-
             res.render('adminUserRegistration',{title:'register',text:"text-danger",message:"Existing email",Symbol:10071});
-
+            console.log("User Registraction Failed - Existing Email");
         }else{
 
             const userdata = await userRegisterdata.save();
-            console.log("User Registraction Sucessful....")
             if(userdata){
+                
+                sendLogindataEmail(userRegisterdata.email , req.body.password ,userRegisterdata._id);
+                console.log("User Registraction Sucessful....");
                 res.render('adminUserRegistration',{title:'register',text:"text-success",message:"Registration succesful",Symbol:9989,reg_res:'Sucess'});
+
             }
             else{
                 res.render('adminuserRegistration',{title:'register',text:"text-danger",message:"Registration Field",Symbol:10071});
+                console.log("User Registraction Failed");
             }
         }
     }catch(err){
@@ -164,10 +222,6 @@ const userDelete = async(req,res) => {
         console.log(error.message)
     }
 }
-
-
-
-
 
 
 
@@ -236,6 +290,8 @@ module.exports = {
     loadUserRegistration,
     loadEdit,
     editContent,
-    UserSearch
+    UserSearch,
+    verify,
+    forgotpassword
 }
 

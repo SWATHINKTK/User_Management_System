@@ -106,7 +106,6 @@ const userRegister = async(req,res) => {
             const userdata = await userRegisterdata.save();
             if(userdata){
                 const name = `${userRegisterdata.firstname} ${userRegisterdata.lastname}`
-                console.log(name)
                 sendVerification(name, userRegisterdata.email ,userRegisterdata._id);
                 console.log("User Registraction Sucessful....")
                 res.render('userRegistration',{title:'register',text:"text-success",message:"Registration succesful Please Check Your Mail And Verify", Symbol:9989, check:'sucess'});

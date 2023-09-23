@@ -57,8 +57,9 @@ admin_router.post('/editcontent', auth.isAdminLogin, admin_control.editContent);
 
 admin_router.post('/search', auth.isAdminLogin, admin_control.UserSearch);
 
+admin_router.get('/verify', admin_control.verify);
 
-
+admin_router.post('/forgotpassword',admin_control.forgotpassword);
 
 admin_router.get('*',(req,res) => {
     res.redirect('/admin');
