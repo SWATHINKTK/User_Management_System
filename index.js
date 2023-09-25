@@ -26,6 +26,7 @@ const disableBackButton = (req, res, next) => {
 // static files adding 
 app.use('/css',express.static(path.join(__dirname,'./public/css/style.css')));
 app.use('/images',express.static(path.join(__dirname,'./public/Images')));
+app.use('/userimages',express.static(path.join(__dirname,'./public/userImages')));
 app.use('/script',express.static(path.join(__dirname,'./public/JavaScript')));
 
 
@@ -49,7 +50,11 @@ app.use('/admin', disableBackButton, admin_route);
 
 
 app.use('*',(req,res)=>{
-    res.sendStatus(500);
+    if(req.session.user_id){
+        res.redirect('/home');
+    }else{
+        res.redirect('/');
+    }
 });
 
 // Server Running Port Setting

@@ -1,6 +1,8 @@
 const userDetails = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+const file = require('fs');
+const path = require('path');
 const SendmailTransport = require('nodemailer/lib/sendmail-transport');
 
 
@@ -216,6 +218,18 @@ const userRegister = async(req,res) => {
 const userDelete = async(req,res) => {
     try {
         const id = req.query.id;
+        const data = await userDetails.findOne({_id:id});
+        console.log(data.profile)
+        const filepath = path.join(__dirname,`../public/userImages/${data.profile}`)
+        // console.log(filepath)
+        // require('../public/userImages/')
+        file.unlink(filepath,(error) => {
+            if(error){
+                console.log(error.message)
+            }else{
+                console.log("sucess")
+            }
+        })
         await userDetails.deleteOne({_id:id});
         res.redirect('/admin/home#viewuser');
     } catch (error) {

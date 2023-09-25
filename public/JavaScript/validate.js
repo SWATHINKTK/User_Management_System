@@ -4,7 +4,7 @@
 function usernameValidate(data){
     const username = data.value;
     const userSection = document.getElementById('validateUsername');
-    const userRegx = /[a-zA-Z._]{3,}@[a-zA-Z]{3,}[.]{1}[a-zA-Z.]{2,}/ ;
+    const userRegx = /^[a-zA-Z0-9._][^\/'":;,#$%&*()_=+]{3,}@[a-zA-Z]{3,}[.]{1}[a-zA-Z.]{2,}/ ;
 
 
     if( username == ''){
@@ -22,7 +22,7 @@ function passwordValidate(data){
     const password = data.value;
     console.log(password.length)
     const userSection = document.getElementById('validatePassword');
-    // const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$/
+    // const passRegex = /^[987]{1,}[^\/'":;,#$%&*()_=+a-zA-z][0-9]{9}/
 
 
     if( password == ''){
@@ -81,9 +81,15 @@ function nameValidate()
 // PhoneNumber Validation 
 function phnvalidation(){
     const phone = document.getElementById('phone').value;
+    const phnRegex = /^[6-9]\d{9}$/;
 
-    if(phone == '' || phone.length == 10){
-        document.getElementById('phn').innerHTML = 'Phone number is required . must have 10 digit';
+    // console.log(typeof phone,phone.length)
+
+    if(phone == ''){
+        document.getElementById('phn').innerHTML = 'Phone number is required .';
+
+    }else if(!(phnRegex.test(phone))){
+        document.getElementById('phn').innerHTML = 'must have Proper format';
 
     }else{
         document.getElementById('phn').innerHTML = '';
@@ -98,17 +104,23 @@ function phnvalidation(){
 function regPassvalidate(){
     const password = document.getElementById('password').value;
     const confirm_password = document.getElementById('passwordconfirm').value;
-    console.log(password,confirm_password)
+    console.log(password)
+    console.log(confirm_password)
+    console.log(confirm_password == password)
+
     if(password == '' || password.length < 6){
         document.getElementById('passwordvalidate').innerHTML = 'Enter the field length must have 6+';
-    }else if(password.match(confirm_password)){
-
-        document.getElementById('confirmvalidate').innerHTML = 'Password do not match';
-
     }else{
         document.getElementById('passwordvalidate').innerHTML = '';
-        document.getElementById('confirmvalidate').innerHTML = '';
     }
+    
+    if(!(password == confirm_password)){
+        document.getElementById('confirmvalidate').innerHTML = 'Password do not match';
+    }else{
+        document.getElementById('confirmvalidate').innerHTML = '';
+
+    }
+
 
 }
 

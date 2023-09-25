@@ -62,7 +62,11 @@ admin_router.get('/verify', admin_control.verify);
 admin_router.post('/forgotpassword',admin_control.forgotpassword);
 
 admin_router.get('*',(req,res) => {
-    res.redirect('/admin');
+    if(req.session.admin_id){
+        res.redirect('/admin/home')
+    }else{
+        res.redirect('/admin');
+    }
 })
 
 module.exports = admin_router ;
