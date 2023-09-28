@@ -147,7 +147,6 @@ const verifyLogin = async(req,res) => {
 
         const userData = await userdetils.findOne({email:username});
         
-        
         if(userData && userData.is_admin == 0){
             if(userData.is_verified == 0){
                 res.redirect('/?result=1&data=Please Verify Email');
@@ -157,12 +156,14 @@ const verifyLogin = async(req,res) => {
             const passwordMatch = await bcrypt.compare(password,userData.password);
             if(passwordMatch)
             {
+              
                 req.session.user_id = userData._id;
                 console.log(`${userData.firstname} ${userData.lastname} is Logged in`);
                 res.redirect('/home');
                 res.end();
             }else{
                 res.redirect('/?result=1');
+                console.log("*****************************")
                 // res.render('UserLogin',{title:'login',text:'text-danger',Symbol:10071,message:'Login Only Valid User',result:'failed'});     
             }
         }else{
